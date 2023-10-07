@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head.ejs')%>
+
+    <body>
+        <%- include('./nav.ejs')%>
+            <div class="post-blog-container">
+                <h2>create new blog</h2>
+                <div class="post-form">
+                    <form action="/add-blog" method="POST">
+                        <div class="input-control">
+                            <label for="">Title</label>
+                            <br>
+                            <input type="text" required name="title">
+                        </div>
+                        <div class="input-control">
+                            <label for="">snippet</label>
+                            <br>
+                            <input type="text" required name="snippet">
+                        </div>
+                        <div class="input-control">
+                            <label for="">Body</label>
+                            <br>
+                            <textarea name="body" id="" required cols="30" rows="10"></textarea>
+                        </div>
+                        <button>submit</button>
+                    </form>
+                </div>
+            </div>
+            <%-include('./footer.ejs')%>
+    </body>
+
+</html>

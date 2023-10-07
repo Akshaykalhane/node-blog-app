@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head.ejs')%>
+<body>
+    <%- include('./nav.ejs') %>
+    <div class="post-blog-container">
+        <h2>Edit Your Blog</h2>
+        <div class="post-form" >
+            <form class="form">
+                <div class="input-control">
+                    <label for="">Title</label>
+                    <br>
+                    <input type="text" class="title" required name="title" value="<%=blog.title%>">
+                </div>
+                <div class="input-control">
+                    <label for="">snippet</label>
+                    <br>
+                    <input type="text" required class="snippet" name="snippet" value="<%=blog.snippet%>">
+                </div>
+                <div class="input-control">
+                    <label for="">Body</label>
+                    <br>
+                    <textarea name="body" id="" class="body" required cols="30" rows="10"><%= blog.body %></textarea>
+                </div>
+                <button id="update-btn" data-id="<%=id%>">update</button>
+                <a href="/about">Cancel</a>
+            </form>
+        </div>
+    </div>
+    <%- include('./footer.ejs')%>
+    <script>
+        console.log(document.querySelector('#update-btn').dataset.id)
+        const updateButton = document.querySelector('form.form');
+        updateButton.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            console.log({title:document.querySelector('.title').value,
+            snippet:document.querySelector('.snippet').value,
+            body:document.querySelector('.body').value})
+            const data = {
+                title:document.querySelector('.title').value,
+                snippet:document.querySelector('.snippet').value,
+                body:document.querySelector('.body').value,
+            }
+            const id= document.querySelector('#update-btn').dataset.id;
+        //     console.log('update clicked',id)
+        //     console.log(e.target)
+            fetch(`/update-blog/${id}`,{
+                method:"PATCH",
+                headers:{
+                    'Content-type':'application/json;charset=UTF-8',
+                    'Accept':'application/json',
+                },
+                body:JSON.stringify(data)      
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                if(data.redirect='/'){
+                    window.location.href='/'
+                }
+            })
+            .catch((err)=>console.log(err))
+        })
+        // const id = updateButton.dataset.id;
+    </script>
+</body>
+</html>

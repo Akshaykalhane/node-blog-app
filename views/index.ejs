@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head.ejs')%>
+
+    <body>
+        <div class="container">
+            <h2>Dev Blogs</h2>
+            <p>Coding | Blogs | Tutorial</p>
+        </div>
+        <%- include('./nav.ejs')%>
+            <div class="blog-container">
+                <!-- <h3>All Blogs</h3> -->
+                <% if(blogs && blogs.length>0) { %>
+                    <% blogs.forEach((blog)=>{ %>
+                        <div class="blogs">
+                            <h2>
+                                <%=blog.title%>
+                            </h2>
+                            <p>
+                                <%=blog.body%>
+                            </p>
+
+                            <a href="/blog/<%=blog._id%>" class="read-btn">Read blog</a>
+                        </div>
+                            <%})} else {%>
+                                <div class="blogs">
+                                    <h2>no blog found.</h2>
+                                </div>
+                                <%}%>
+            </div>
+            <%-include('./footer.ejs')%>
+    </body>
+
+</html>

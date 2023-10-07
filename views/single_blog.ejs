@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('./head.ejs')%>
+<body>
+    <%- include('./nav.ejs')%>
+    <div class="blog-read">
+        <h3><%=blog.title%></h3>
+        <p><%=blog.body%></p>
+        <button id="delete" data-id=<%=id%>>Delete</button>
+        <a href="/edit-blog/<%=id%>"id="edit" >Edit</a>
+    </div>
+    <%-include('./footer.ejs')%>
+    <script>
+        const delBtn=document.querySelector('#delete');
+        const editBtn = document.querySelector('#edit');
+        delBtn.addEventListener('click',()=>{
+                console.log('clicked')
+                const id = delBtn.dataset.id;
+                fetch(`/delete/${id}`,{method:'DELETE'})
+                .then((res)=>res.json())
+                .then((data)=>{
+                    console.log(data);
+                    window.location.href=data.redirect;
+                })
+                .catch((err)=>console.log(err));
+        });
+
+    </script>
+</body>
+</html>
