@@ -76,7 +76,7 @@ const options={
 app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}));
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}));
 app.use((req, res, next) => {
     res.locals.path = req.path;
     next();
